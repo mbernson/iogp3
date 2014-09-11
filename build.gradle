@@ -13,7 +13,7 @@ apply plugin: 'application'
 
 sourceCompatibility = '1.8'
 
-mainClassName = 'nl.hsleiden.iopr3.Main'
+mainClassName = 'nl.hsleiden.iopr3.ValBewegingApp'
 
 // In this section you declare where to find the dependencies of your project
 repositories {

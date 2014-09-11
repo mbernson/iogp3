@@ -1,16 +1,16 @@
 package nl.hsleiden.iopr3.controller;
 
-import ........
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
 // Bestudeer de code. Raadpleeg daar waar nodig is de API.
 // Beantwoord de vragen .. zie commentaar bij de code. 
 
-
 public class BalController implements Runnable, MouseWheelListener
 {
-   private .......
-   private ..............   // wat zou je hier private declareren?
-   private ...................  // denk aan MVC 
+//   private .......
+//   private ..............   // wat zou je hier private declareren?
+//   private ...................  // denk aan MVC
    
    private boolean doorgaan_thread; // thread aan/uit
    private boolean doorgaan_wheel;  // 'verplaatsen van de bal met het wieltje' aan/uit
@@ -20,8 +20,6 @@ public class BalController implements Runnable, MouseWheelListener
    private double valhoogte; // in meter 
    
    private Thread draad;
-   
-   
 
    public BalController (.............................................................)
    {
@@ -54,8 +52,8 @@ public class BalController implements Runnable, MouseWheelListener
 
    public void mouseWheelMoved (MouseWheelEvent event)
    {      
-      if      // deze methode alleen uitvoeren als de thread uitstaat EN
-      {       // 'het verplaatsen mbv het wieltje' aan
+      if(false) // deze methode alleen uitvoeren als de thread uitstaat EN
+      {         // 'het verplaatsen mbv het wieltje' aan
       
         int ticks = event.getWheelRotation(); // wat levert dit op? 
         

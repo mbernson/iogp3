@@ -21,7 +21,7 @@ public class DataView extends JPanel // implements .............................
     private boolean dragged = false;
     private int dragX, dragY;
 
-    public DataView(....) {
+    public DataView() {
         // zet de achtergrondkleur van dit view op oranje
         // voeg verschillende MouseListeners toe aan dit view
 

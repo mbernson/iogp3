@@ -12,18 +12,19 @@ import java.awt.event.MouseWheelListener;
 // Beantwoord de vragen .. zie commentaar bij de code. 
 
 public class BalController implements Runnable, MouseWheelListener {
-//   private .......
-//   private ..............   // wat zou je hier private declareren?
-//   private ...................  // denk aan MVC
+    private final Bal bal;
+    private final BalView balview;
+    private final ValBewegingPaneel valBewegingPaneel;
+    private final ControlePaneelNoord noordpaneel;
 
-    private boolean doorgaan_thread; // thread aan/uit
-    private boolean doorgaan_wheel;  // 'verplaatsen van de bal met het wieltje' aan/uit
+    private boolean doorgaan_thread, // thread aan/uit
+                    doorgaan_wheel;  // 'verplaatsen van de bal met het wieltje' aan/uit
 
     private int dt;  // steptime & sleeptime in msec
-    // en wat betekent het als ze gelijk zijn?
+                     // en wat betekent het als ze gelijk zijn?
     private double valhoogte; // in meter
 
-    private Thread draad;
+    private Thread draad = new Thread();
 
     public BalController(Bal bal, BalView balview, ValBewegingPaneel valBewegingPaneel, ControlePaneelNoord noordpaneel) {
         // geef valpaneel een MouseWheelListener en laat het
@@ -32,12 +33,18 @@ public class BalController implements Runnable, MouseWheelListener {
         // mbv het wieltje' uit
         // initialiseer this.dt .. welk object gebruik je daarvoor?
         // initialiseer this.valhoogte .. welk object gebruik je daarvoor?
+        this.bal = bal;
+        this.valhoogte = bal.getY();
+
+        this.balview = balview;
+        this.valBewegingPaneel = valBewegingPaneel;
+        this.noordpaneel = noordpaneel;
     }
 
     public void run() // waar komt deze methode vandaan hoe en waar wordt hij aangeroepen?
     {
         while (doorgaan_thread) {
-            if // laat de thread stoppen als de bal de bodem bereikt
+            if (valhoogte >= bal.getY())// laat de thread stoppen als de bal de bodem bereikt
             {
                 pleaseStop();
                 return;
@@ -46,8 +53,13 @@ public class BalController implements Runnable, MouseWheelListener {
             {
                 // las een pauze in van 'dt'msec
                 // pas de eigenschap 'dt' van de bal aan
+                try {
+                    Thread.sleep(dt);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-            ... // niet vergeten opnieuw ... ?
+            // niet vergeten opnieuw ... ?
         }
     }
 
@@ -59,11 +71,10 @@ public class BalController implements Runnable, MouseWheelListener {
             int ticks = event.getWheelRotation(); // wat levert dit op?
 
             if ((bal.getY() < valhoogte) && (bal.getT() > 0)) // waarom deze conditie?
-            // pas de bal aan en gebruik 'ticks' en 'dt'
+            ;// pas de bal aan en gebruik 'ticks' en 'dt'
             else
             return;
-
-            ... // niet vergeten opnieuw ... ?
+            // niet vergeten opnieuw ... ?
         }
     }
 
@@ -76,7 +87,7 @@ public class BalController implements Runnable, MouseWheelListener {
         // zet de thread aan en de 'verplaatsing mbv
         // van het wieltje' uit
 
-        draad = // creeer een nieuw Thread-object
+        draad = null; // creeer een nieuw Thread-object
         // start de thread .. welke methode wordt daarna dus aangeroepen?
     }
 

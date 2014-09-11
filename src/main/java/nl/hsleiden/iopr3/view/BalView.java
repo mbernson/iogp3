@@ -11,16 +11,17 @@ import java.awt.*;
 // Beantwoord de vragen .. zie commentaar bij de code. 
 
 public class BalView extends JPanel {
-    private Bal bal;
+    private final Bal bal;
+    private final ValBewegingPaneel valpaneel;
+    private final ControlePaneelNoord noordpaneel;
+    private final DataView dataview;
 
-    private ValBewegingPaneel valpaneel;
-    private ControlePaneelNoord noordpaneel;
-    private DataView dataview;
+    public BalView(Bal bal, ValBewegingPaneel valpaneel, ControlePaneelNoord noordpaneel, DataView dataview) {
+        this.bal = bal;
+        this.valpaneel = valpaneel;
+        this.noordpaneel = noordpaneel;
+        this.dataview = dataview;
 
-    public BalView(Bal b, ValBewegingPaneel p, ControlePaneelNoord c) {
-        bal = b;
-        valpaneel = p;
-        noordpaneel = c;
         // zet de 'ondoorzichtbaarheid' van de view op false; zie 'setOpaque' in de API; waarom?
         setOpaque(false);
         // geef deze view een size van 12 bij 12 pixels
@@ -34,14 +35,14 @@ public class BalView extends JPanel {
         super.paintComponent(g);
 
         double schaalfactor_y = (valpaneel.getEindY() - valpaneel.getStartY()) / noordpaneel.getYbereik();
-        double schaalfactor_x = null; // ..........................................................................
+        double schaalfactor_x = 0; // ..........................................................................
 
         // wat stelt zo'n schaalfactor nou precies voor?
         // waarom staan deze instructies in deze methode en niet (bv) eenmalig in de constructor?
 
 
         int x = (int) (valpaneel.getStartX() + bal.getX() * schaalfactor_x);
-        int y = null; // ............................................................
+        int y = 0; // ............................................................
         // wat doen deze instructies?
 
         // plaats deze view op lokatie (x, y)

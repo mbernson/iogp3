@@ -1,23 +1,22 @@
 package nl.hsleiden.iopr3.view.ui;
 
-import ........import nl.hsleiden.iopr3.controller.BalController;
+import nl.hsleiden.iopr3.ValBewegingApp;
+import nl.hsleiden.iopr3.controller.BalController;
+import nl.hsleiden.iopr3.model.Bal;
 import nl.hsleiden.iopr3.view.BalView;
 
+import javax.swing.*;
+import java.awt.*;
 
 // Bestudeer de code. Raadpleeg daar waar nodig is de API.
 // Beantwoord de vragen .. zie commentaar bij de code. 
 
-
-
-public class ValBewegingPaneel extends JPanel 
+public class ValBewegingPaneel extends JPanel
 {
-   
-
    private int startX, startY;
    private int eindX, eindY;
    private final int PARTS = 12; // hoezo 12? 
-   
-   
+
    private Stroke s_new;
 
    public ValBewegingPaneel(ValBewegingApp frame, ControlePaneelNoord noordpaneel)

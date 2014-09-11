@@ -1,10 +1,9 @@
 package nl.hsleiden.iopr3.model;
 
-import ........
-
 // Bestudeer de code. Raadpleeg daar waar nodig is de API.
 // Beantwoord de vragen .. zie commentaar bij de code. 
 
+import java.awt.*;
 
 public class Bal
 {

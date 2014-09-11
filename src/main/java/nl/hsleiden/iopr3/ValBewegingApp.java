@@ -1,4 +1,10 @@
-import ........
+package nl.hsleiden.iopr3;
+
+import nl.hsleiden.iopr3.view.ui.ControlePaneelNoord;
+import nl.hsleiden.iopr3.view.ui.ValBewegingPaneel;
+
+import javax.swing.*;
+import java.awt.*;
 
 // Bestudeer de code. Raadpleeg daar waar nodig is de API.
 // Beantwoord de vragen .. zie commentaar bij de code. 

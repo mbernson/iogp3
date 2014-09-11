@@ -7,8 +7,7 @@ import javax.swing.*;
 
 public class DataView extends JPanel implements ...............................................
 {
-
-   private Bal bal;  
+   private Bal bal;
    private final int MINHOOGTE = 17; // minmale hoogte van dit view
    private int hoogte;               // actuele hoogte van dit view
    
@@ -16,8 +15,6 @@ public class DataView extends JPanel implements ................................
    private boolean dragged = false;
    private int dragX, dragY;
    
-   
-
    public DataView (................)
    {
       // zet de achtergrondkleur van dit view op oranje
@@ -31,8 +28,6 @@ public class DataView extends JPanel implements ................................
       setBounds (0, 0, 180, hoogte); // wat doet dit statement? 
    }
 
-
-   
    public void paintComponent (Graphics g)
    {
       super.paintComponent(g);

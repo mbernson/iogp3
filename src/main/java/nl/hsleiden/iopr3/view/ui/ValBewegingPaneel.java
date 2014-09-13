@@ -26,7 +26,7 @@ public class ValBewegingPaneel extends JPanel {
 
         Bal bal = new Bal();
         // public BalView(Bal b, ValBewegingPaneel p, ControlePaneel c)
-        BalView balview = new BalView(bal, this, noordpaneel); // waarom worden ook het (dit) paneel en het noordpaneel
+        BalView balview = new BalView(bal, this, noordpaneel, null); // waarom worden ook het (dit) paneel en het noordpaneel
         // doorgegeven aan het balview-object?
 
         BalController controller = new BalController(bal, balview, this, noordpaneel); // idem maar nu aan het controller-object?

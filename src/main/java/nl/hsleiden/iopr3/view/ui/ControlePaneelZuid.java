@@ -21,13 +21,15 @@ public class ControlePaneelZuid extends ControlePaneel implements ActionListener
                     stop = new JButton("Stop"),
                     reset = new JButton("Reset");
 
-
-    // bij het drukken op de stop-button wordt de controller
-    // verzocht de animatie te stoppen (bevriezen)
-    // bij het drukken op de animate-button wordt de bal gereset en dus ook ?
-    // verder wordt dan de controller verzocht de animatie opnieuw op te starten
-
     public ControlePaneelZuid(Bal bal, BalView balview, BalController controller) {
+
+        animate.addActionListener(this);
+        stop.addActionListener(this);
+        reset.addActionListener(this);
+
+        add(animate);
+        add(stop);
+        add(reset);
 
         this.bal = bal;
         this.balview = balview;
@@ -35,7 +37,23 @@ public class ControlePaneelZuid extends ControlePaneel implements ActionListener
     }
 
     public void actionPerformed(ActionEvent ae) {
-        // TODO
+        // bij het drukken op de stop-button wordt de controller
+        // verzocht de animatie te stoppen (bevriezen)
+        // bij het drukken op de animate-button wordt de bal gereset en dus ook ?
+        // verder wordt dan de controller verzocht de animatie opnieuw op te starten
+
+        if ( ae.getSource() == animate ){
+            //bal.reset();
+        }
+
+        if ( ae.getSource() == stop ){
+            //controller.run();
+        }
+
+        if ( ae.getSource() == reset ){
+            //bal.reset();....??
+
+        }
     }
 
 }

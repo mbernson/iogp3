@@ -25,7 +25,7 @@ public class BalView extends JPanel {
         // zet de 'ondoorzichtbaarheid' van de view op false; zie 'setOpaque' in de API; waarom?
         setOpaque(false);
         // geef deze view een size van 12 bij 12 pixels
-        setSize(12, 12);
+        setSize(24, 24);
         // creeer het object dataview (wat geef je als parameter mee?)
         dataview = new DataView();
         // voeg de dataview toe aan het valpaneel
@@ -35,24 +35,26 @@ public class BalView extends JPanel {
         super.paintComponent(g);
 
         double schaalfactor_y = (valpaneel.getEindY() - valpaneel.getStartY()) / noordpaneel.getYbereik();
-        double schaalfactor_x = 0; // ..........................................................................
+        double schaalfactor_x = (valpaneel.getEindX() - valpaneel.getStartX()) / noordpaneel.getXbereik(); // ..........................................................................
 
         // wat stelt zo'n schaalfactor nou precies voor?
         // waarom staan deze instructies in deze methode en niet (bv) eenmalig in de constructor?
 
 
         int x = (int) (valpaneel.getStartX() + bal.getX() * schaalfactor_x);
-        int y = 0; // ............................................................
+        int y = (int) (valpaneel.getStartY() + bal.getY() * schaalfactor_y); // ............................................................
         // wat doen deze instructies?
 
-        // plaats deze view op lokatie (x, y)
+        setLocation(x,y); // plaats deze view op lokatie (x, y)
 
-        // zet de tekenkleur op de kleur van de bal
-        // teken de bal
-        // accentueer de rand van de bal
 
-        // zorg dat de dataview opnieuw getekend wordt iedere keer dat de balview
-        // opnieuw getekend wordt .... waarom?
+        g.setColor( Color.BLACK ); // accentueer de rand van de bal
+        g.drawOval( (int) bal.getX(), (int) bal.getY(), 11, 11 ); // accentueer de rand van de bal
+
+        g.setColor( bal.getKleur());// zet de tekenkleur op de kleur van de bal
+        g.fillOval( (int) bal.getX(), (int) bal.getY(), 11, 11 ); // teken de bal
+
+        repaint(); //Opnieuw tekenen
     }
 
 }

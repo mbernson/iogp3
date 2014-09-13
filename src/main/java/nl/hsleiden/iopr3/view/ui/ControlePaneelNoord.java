@@ -18,7 +18,7 @@ public class ControlePaneelNoord extends ControlePaneel {
 
     public ControlePaneelNoord() {
         dtVeld.setText("20");
-        bereikXveld.setText("0");
+        bereikXveld.setText("100");
         bereikYveld.setText("100");
 
         add(new JLabel("dT"));
@@ -30,18 +30,18 @@ public class ControlePaneelNoord extends ControlePaneel {
     }
 
     public double getYbereik() {
-        // TODO: implement me
-        return 0;
+        double a = Double.parseDouble(bereikYveld.getText());
+        return a;
     }
 
     public double getXbereik() {
-        // TODO: implement me
-        return 0;
+        double a = Double.parseDouble(bereikXveld.getText());
+        return a;
     }
 
     public int getDt() {
-        // TODO: implement me
-        return 0;
+        int a = Integer.parseInt(dtVeld.getText());
+        return a;
     }
 
     // wat zou je kunnen doen om tijdens de animatie het gebruik van

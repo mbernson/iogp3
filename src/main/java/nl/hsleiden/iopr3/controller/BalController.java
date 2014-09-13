@@ -35,6 +35,7 @@ public class BalController implements Runnable, MouseWheelListener {
         // initialiseer this.valhoogte .. welk object gebruik je daarvoor?
         this.bal = bal;
         this.valhoogte = bal.getY();
+        this.dt=bal.getT(); // T Moet DT worden!!!
 
         this.balview = balview;
         this.valBewegingPaneel = valBewegingPaneel;
@@ -65,7 +66,7 @@ public class BalController implements Runnable, MouseWheelListener {
 
 
     public void mouseWheelMoved(MouseWheelEvent event) {
-        if (false) // deze methode alleen uitvoeren als de thread uitstaat EN
+        if (doorgaan_thread==false && doorgaan_wheel==true ) // deze methode alleen uitvoeren als de thread uitstaat EN
         {         // 'het verplaatsen mbv het wieltje' aan
 
             int ticks = event.getWheelRotation(); // wat levert dit op?
@@ -82,8 +83,12 @@ public class BalController implements Runnable, MouseWheelListener {
         if (draad != null)
             return;
 
+        this.valhoogte = bal.getY(); // VALHOOGTE moet anders!!!
+        this.dt=bal.getT(); // Moet nog worden gewijzigd naar DT!!!
         // initialiseer 'dt'en 'valhoogte'
 
+        doorgaan_thread=true;
+        doorgaan_wheel=false;
         // zet de thread aan en de 'verplaatsing mbv
         // van het wieltje' uit
 
@@ -93,6 +98,8 @@ public class BalController implements Runnable, MouseWheelListener {
 
 
     public void pleaseStop() {
+        doorgaan_thread=false;
+        doorgaan_wheel=true;
         // thread uit en 'verplaatsing mbv het wieltje' aan
         draad = null; // waarom?
     }

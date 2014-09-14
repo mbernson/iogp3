@@ -50,7 +50,8 @@ public class ControlePaneelZuid extends ControlePaneel implements ActionListener
         // verder wordt dan de controller verzocht de animatie opnieuw op te starten
 
         if ( ae.getSource() == animate ){
-            //bal.reset();
+            bal.reset();
+            controller.run();
         }
 
         if ( ae.getSource() == stop ){
@@ -58,7 +59,7 @@ public class ControlePaneelZuid extends ControlePaneel implements ActionListener
         }
 
         if ( ae.getSource() == reset ){
-            //bal.reset();....??
+            bal.reset();
 
         }
     }

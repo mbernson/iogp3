@@ -24,7 +24,7 @@ public class ControlePaneelZuid extends ControlePaneel implements ActionListener
 
     // bij het drukken op de stop-button wordt de controller
     // verzocht de animatie te stoppen (bevriezen)
-    // bij het drukken op de animate-button wordt de bal gereset en dus ook ?
+    // bij het drukken op de animate-button wordt de bal gereset en dus ook de snelheid etc
     // verder wordt dan de controller verzocht de animatie opnieuw op te starten
 
     public ControlePaneelZuid(Bal bal, BalView balview, BalController controller) {

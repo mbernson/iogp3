@@ -44,10 +44,11 @@ public class BalController implements Runnable, MouseWheelListener {
 
     public void run() // waar komt deze methode vandaan hoe en waar wordt hij aangeroepen?
     {
+        this.dt=noordpaneel.getDT();
         while (doorgaan_thread) {
-            if (bal.getY() >= valBewegingPaneel.getBounds().getMaxY())// laat de thread stoppen als de bal de bodem bereikt
+            if (bal.getAdjustedY(dt) >= noordpaneel.getYbereik())// laat de thread stoppen als de bal de bodem bereikt
             {
-                //Misschien niet correct, check later meer
+                System.out.println(bal.getAdjustedY(dt));
                 pleaseStop();
                 return;
             }
@@ -59,8 +60,8 @@ public class BalController implements Runnable, MouseWheelListener {
                 System.out.println(valBewegingPaneel.getBounds().getMaxY());
                 // las een pauze in van 'dt'msec
                 // pas de eigenschap 'dt' van de bal aan
-                slaap(dt);
                 bal.adjust(dt);
+                slaap(dt);
             }
             // niet vergeten opnieuw ... ?
             balview.repaint();

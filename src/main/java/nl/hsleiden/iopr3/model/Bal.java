@@ -27,6 +27,12 @@ public class Bal {
         reset();
     }
 
+    public double getAdjustedY(int dt) {
+        int t = this.t;
+        final double tijd_seconden = (t + dt) / 1000;
+        return .5 * VALVERSNELLING * tijd_seconden * tijd_seconden;
+    }
+
     public void adjust(int dt) // dt in msec
     {
         t += dt;

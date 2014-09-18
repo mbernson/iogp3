@@ -39,10 +39,15 @@ public class ValBewegingPaneel extends JPanel {
         ControlePaneelZuid zuidpaneel = new ControlePaneelZuid(bal, balview, controller, this);
         frame.add(zuidpaneel, BorderLayout.SOUTH);
         // Waarom wordt het zuidpaneel-object niet (net als het noordpaneel object aangamaakt in het frame-object?
+
+        startX = getWidth() / PARTS;   // in pixels
+        startY = getHeight() / PARTS;  //
+        eindX = (PARTS - 1) * startX;  //
+        eindY = (PARTS - 1) * startY;  //
     }
 
-
-    public void paintComponent(Graphics gr) {
+    public void paintComponent (Graphics gr)
+    {
         super.paintComponent(gr);
         Graphics2D g = (Graphics2D) gr; // wat gebeurt hier en waarom?
 
@@ -52,26 +57,28 @@ public class ValBewegingPaneel extends JPanel {
         startX = getWidth() / PARTS;   // in pixels
         startY = getHeight() / PARTS;  //
         eindX = (PARTS - 1) * startX;  //
-        eindY = (PARTS - 1) * startY;  //
+        eindY = (PARTS - 1) * startY+1;  //
+
 
         g.setColor(Color.white);
         g.fillRect(startX, startY, eindX-startX, eindY-startY);
 
-        g.setColor(Color.BLACK);
-        g.drawLine(startX, startY, eindX, startY);
+        g.setColor (Color.BLACK);
+        g.drawLine (startX, startY, eindX, startY);
 
         g.setStroke(s_new);
-        for (int te = 2; te <= (PARTS - 2); te++) {
-            g.drawLine(startX, te * startY, eindX, te * startY);
-            g.drawLine(te * startX, startY, te * startX, eindY);
+        for (int te = 2; te <= (PARTS - 2); te++)
+        {
+            g.drawLine (startX, te * startY, eindX, te * startY);
+            g.drawLine (te * startX, startY, te * startX, eindY);
         }
         g.setStroke(new BasicStroke());
         g.drawLine (startX, eindY, eindX, eindY);
         g.drawLine (startX, startY, startX, eindY);
         g.drawLine (eindX, startY, eindX, eindY);
 
+        g.setColor (Color.BLUE);
 
-        g.setColor(Color.BLUE);
 
         for(int x = 0; x <= 10; x++) // x-as voorzien van legenda
         {
@@ -85,15 +92,15 @@ public class ValBewegingPaneel extends JPanel {
             }
         }
 
-        for(int y = 0; y <= 10; y++) // y-as voorzien van legenda
+        for(int x = 0; x <= 10; x++) // y-as voorzien van legenda
         {
-            if(y == 0)
+            if(x == 0)
             {
                 g.drawString ("0", startX-5, startY -20);
             }
             else
             {
-                g.drawString ((legendaY*y) + "", startX - 35, startY * (y+1) + 5);
+                g.drawString ((legendaY*x) + "", startX - 35, startY * (x+1) + 5);
             }
         }
 

@@ -50,7 +50,7 @@ public class ControlePaneelNoord extends ControlePaneel {
         try {
             return Math.abs(Integer.parseInt(dtVeld.getText()));
         } catch (Exception e) {
-            return 20;
+            return 2;
         }
     }
 

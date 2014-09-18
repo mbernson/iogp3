@@ -17,14 +17,14 @@ public class BalController implements Runnable, MouseWheelListener {
     private final ValBewegingPaneel valBewegingPaneel;
     private final ControlePaneelNoord noordpaneel;
 
-    private boolean doorgaan_thread, // thread aan/uit
-                    doorgaan_wheel;  // 'verplaatsen van de bal met het wieltje' aan/uit
+    private boolean doorgaan_thread = false, // thread aan/uit
+                    doorgaan_wheel = false;  // 'verplaatsen van de bal met het wieltje' aan/uit
 
     private int dt;  // steptime & sleeptime in msec
                      // en wat betekent het als ze gelijk zijn?
     private double valhoogte; // in meter
 
-    private Thread draad = new Thread();
+    private Thread draad;
 
     public BalController(Bal bal, BalView balview, ValBewegingPaneel valBewegingPaneel, ControlePaneelNoord noordpaneel) {
         // geef valpaneel een MouseWheelListener en laat het
@@ -34,18 +34,18 @@ public class BalController implements Runnable, MouseWheelListener {
         // initialiseer this.dt .. welk object gebruik je daarvoor?
         // initialiseer this.valhoogte .. welk object gebruik je daarvoor?
         this.bal = bal;
-        this.valhoogte = bal.getY();
-        this.dt=bal.getT(); // T Moet DT worden!!!
-
         this.balview = balview;
         this.valBewegingPaneel = valBewegingPaneel;
         this.noordpaneel = noordpaneel;
+
+        this.valBewegingPaneel.addMouseWheelListener(this);
+        this.dt=noordpaneel.getDT(); // T Moet DT worden!!!
     }
 
     public void run() // waar komt deze methode vandaan hoe en waar wordt hij aangeroepen?
     {
         while (doorgaan_thread) {
-            if (bal.getY() == valBewegingPaneel.getBounds().getMaxY())// laat de thread stoppen als de bal de bodem bereikt
+            if (bal.getY() >= valBewegingPaneel.getBounds().getMaxY())// laat de thread stoppen als de bal de bodem bereikt
             {
                 //Misschien niet correct, check later meer
                 pleaseStop();
@@ -53,15 +53,17 @@ public class BalController implements Runnable, MouseWheelListener {
             }
             else
             {
+                System.out.print("run, dt: ");
+                System.out.println(dt);
+                System.out.print("maxY ");
+                System.out.println(valBewegingPaneel.getBounds().getMaxY());
                 // las een pauze in van 'dt'msec
                 // pas de eigenschap 'dt' van de bal aan
-                try {
-                    Thread.sleep(dt);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                slaap(dt);
+                bal.adjust(dt);
             }
             // niet vergeten opnieuw ... ?
+            balview.repaint();
         }
     }
 
@@ -71,12 +73,14 @@ public class BalController implements Runnable, MouseWheelListener {
         {         // 'het verplaatsen mbv het wieltje' aan
 
             int ticks = event.getWheelRotation(); // wat levert dit op?
+            this.dt = noordpaneel.getDT();
 
-            if ((bal.getY() < valhoogte) && (bal.getT() > 0)) // waarom deze conditie?
-            ;// pas de bal aan en gebruik 'ticks' en 'dt'
+            if ((balview.getY()-25 <  valBewegingPaneel.getEindY()) && bal.getDT() > 0) // waarom deze conditie?
+                bal.adjust(dt);// pas de bal aan en gebruik 'ticks' en 'dt'
             else
-            return;
+                bal.adjust(-dt);
             // niet vergeten opnieuw ... ?
+            balview.repaint();
         }
     }
 
@@ -84,8 +88,8 @@ public class BalController implements Runnable, MouseWheelListener {
         if (draad != null)
             return;
 
-        this.valhoogte = bal.getY(); // VALHOOGTE moet anders!!!
-        this.dt=bal.getT(); // Moet nog worden gewijzigd naar DT!!!
+        this.valhoogte = valBewegingPaneel.getEindY(); // VALHOOGTE moet anders!!!
+        this.dt=noordpaneel.getDT(); // Moet nog worden gewijzigd naar DT!!!
         // initialiseer 'dt'en 'valhoogte'
 
         doorgaan_thread=true;
@@ -93,8 +97,10 @@ public class BalController implements Runnable, MouseWheelListener {
         // zet de thread aan en de 'verplaatsing mbv
         // van het wieltje' uit
 
-        draad = null; // creeer een nieuw Thread-object
+        draad = new Thread(this); // creeer een nieuw Thread-object
         // start de thread .. welke methode wordt daarna dus aangeroepen?
+        noordpaneel.knopInactief();
+        draad.start();
     }
 
 
@@ -102,6 +108,7 @@ public class BalController implements Runnable, MouseWheelListener {
         doorgaan_thread=false;
         doorgaan_wheel=true;
         // thread uit en 'verplaatsing mbv het wieltje' aan
+        noordpaneel.knopActief();
         draad = null; // waarom?
     }
 

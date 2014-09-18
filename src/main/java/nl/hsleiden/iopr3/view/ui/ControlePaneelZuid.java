@@ -16,23 +16,21 @@ public class ControlePaneelZuid extends ControlePaneel implements ActionListener
     private final Bal bal;
     private final BalView balview;
     private final BalController controller;
+    private final ValBewegingPaneel valpaneel;
 
     private JButton animate = new JButton("Animeren"),
                     stop = new JButton("Stop"),
                     reset = new JButton("Reset");
 
-    public ControlePaneelZuid(Bal bal, BalView balview, BalController controller) {
+    public ControlePaneelZuid(Bal bal, BalView balview, BalController controller, ValBewegingPaneel valpaneel) {
 
-//<<<<<<< HEAD
         animate.addActionListener(this);
         stop.addActionListener(this);
         reset.addActionListener(this);
-//=======
-//    // bij het drukken op de stop-button wordt de controller
-//    // verzocht de animatie te stoppen (bevriezen)
-//    // bij het drukken op de animate-button wordt de bal gereset en dus ook de snelheid etc
-//    // verder wordt dan de controller verzocht de animatie opnieuw op te starten
-//>>>>>>> origin/master
+        // bij het drukken op de stop-button wordt de controller
+        // verzocht de animatie te stoppen (bevriezen)
+        // bij het drukken op de animate-button wordt de bal gereset en dus ook de snelheid etc
+        // verder wordt dan de controller verzocht de animatie opnieuw op te starten
 
         add(animate);
         add(stop);
@@ -41,6 +39,7 @@ public class ControlePaneelZuid extends ControlePaneel implements ActionListener
         this.bal = bal;
         this.balview = balview;
         this.controller = controller;
+        this.valpaneel = valpaneel;
     }
 
     public void actionPerformed(ActionEvent ae) {
@@ -50,16 +49,19 @@ public class ControlePaneelZuid extends ControlePaneel implements ActionListener
         // verder wordt dan de controller verzocht de animatie opnieuw op te starten
 
         if ( ae.getSource() == animate ){
-            //bal.reset();
+            controller.pleaseStart();
+            valpaneel.repaint();
         }
 
         if ( ae.getSource() == stop ){
-            //controller.run();
+            controller.pleaseStop();
         }
 
         if ( ae.getSource() == reset ){
-            //bal.reset();....??
-
+            controller.pleaseStop();
+            valpaneel.repaint();
+            bal.reset(); // ....??
+            balview.repaint();
         }
     }
 

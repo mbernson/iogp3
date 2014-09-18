@@ -7,8 +7,8 @@ import javax.swing.*;
 
 public class ControlePaneelNoord extends ControlePaneel {
     private JTextField bereikXveld = new JTextField(),
-            bereikYveld = new JTextField(),
-            dtVeld = new JTextField();
+                       bereikYveld = new JTextField(),
+                       dtVeld = new JTextField();
 
     // geef de velden bereikXveld en bereikYveld default
     // de waarden 100 (meter)
@@ -29,22 +29,43 @@ public class ControlePaneelNoord extends ControlePaneel {
         add(bereikYveld);
     }
 
+
     public double getYbereik() {
-        double a = Double.parseDouble(bereikYveld.getText());
-        return a;
+        try {
+            return Math.abs(Double.parseDouble(bereikYveld.getText()));
+        } catch (Exception e) {
+            return 100;
+        }
     }
 
     public double getXbereik() {
-        double a = Double.parseDouble(bereikXveld.getText());
-        return a;
+        try {
+            return Math.abs(Double.parseDouble(bereikXveld.getText()));
+        } catch (Exception e) {
+            return 100;
+        }
     }
 
-    public int getDt() {
-        int a = Integer.parseInt(dtVeld.getText());
-        return a;
+    public int getDT() {
+        try {
+            return Math.abs(Integer.parseInt(dtVeld.getText()));
+        } catch (Exception e) {
+            return 20;
+        }
     }
 
     // wat zou je kunnen doen om tijdens de animatie het gebruik van
     // de invoervelden onmogelijk te maken?
 
+    public void knopActief() {
+        bereikXveld.setEditable(true);
+        bereikYveld.setEditable(true);
+        dtVeld.setEditable(true);
+    }
+
+    public void knopInactief() {
+        bereikXveld.setEditable(false);
+        bereikYveld.setEditable(false);
+        dtVeld.setEditable(false);
+    }
 }

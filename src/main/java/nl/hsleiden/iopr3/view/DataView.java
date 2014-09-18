@@ -24,14 +24,16 @@ public class DataView extends JPanel implements MouseWheelListener, MouseListene
     private boolean dragged = false;
     private int dragX, dragY;
 
-    public DataView() {
+    public DataView(Bal bal) {
+        setLayout(null);
+        this.bal = bal;
 
         addMouseWheelListener(this);
         addMouseMotionListener(this);
         addMouseListener(this);
         // voeg verschillende MouseListeners toe aan dit view
 
-        Border titelrand = null; // view met een rand en titel "bal-data"
+        Border titelrand = BorderFactory.createTitledBorder("bal-data"); // view met een rand en titel "bal-data"
         // zie (bv in de API) de klasse BorderFactory en
         // de methode createTitledBorder
         this.setBorder(titelrand);
@@ -45,7 +47,7 @@ public class DataView extends JPanel implements MouseWheelListener, MouseListene
 
         setBackground(Color.ORANGE);         // zet de achtergrondkleur van dit view op oranje
 
-        String st_t = String.format("%.2f", bal.getT() / 1000.0);
+        String st_t = String.format("%.2f", bal.getDT() / 1000.0);
         // wat doet dit statement precies?
         // waarom wordt er door 1000.0 gedeeld?
 
@@ -103,7 +105,7 @@ public class DataView extends JPanel implements MouseWheelListener, MouseListene
         int x = getX() + me.getX() - dragX;
         int y = getY() + me.getY() - dragY;
 
-        setLocation (x,y);
+        setLocation(x,y);
         // zie aan de hand van het Vierkanten-voorbeeld
         // hoe je de view kan verplaatsen (tweede werkcollege, week 1)
         // maak gebruik van de eigenschappen 'dragX', 'dragY' en 'dragged'

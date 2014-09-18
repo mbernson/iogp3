@@ -5,6 +5,7 @@ import nl.hsleiden.iopr3.view.ui.ControlePaneelNoord;
 import nl.hsleiden.iopr3.view.ui.ValBewegingPaneel;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 
 // Bestudeer de code. Raadpleeg daar waar nodig is de API.
@@ -12,23 +13,29 @@ import java.awt.*;
 
 public class BalView extends JPanel {
     private final Bal bal;
+
     private final ValBewegingPaneel valpaneel;
     private final ControlePaneelNoord noordpaneel;
     private final DataView dataview;
+    private int grootte;
 
-    public BalView(Bal bal, ValBewegingPaneel valpaneel, ControlePaneelNoord noordpaneel, DataView dataview) {
+    public BalView(Bal bal, ValBewegingPaneel valpaneel, ControlePaneelNoord noordpaneel) {
+        setLayout(null);
         this.bal = bal;
         this.valpaneel = valpaneel;
         this.noordpaneel = noordpaneel;
-        this.dataview = dataview;
+        setBorder(BorderFactory.createLineBorder(Color.black));
 
         // zet de 'ondoorzichtbaarheid' van de view op false; zie 'setOpaque' in de API; waarom?
         setOpaque(false);
         // geef deze view een size van 12 bij 12 pixels
-        setSize(24, 24);
+//        setSize(24, 24);
+        grootte = 25;
+        setBounds( 0, 0, grootte + 1,grootte + 1);
         // creeer het object dataview (wat geef je als parameter mee?)
-        dataview = new DataView();
+        dataview = new DataView(bal);
         // voeg de dataview toe aan het valpaneel
+        valpaneel.add(dataview);
     }
 
     public void paintComponent(Graphics g) {

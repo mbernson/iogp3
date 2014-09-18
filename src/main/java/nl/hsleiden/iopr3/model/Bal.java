@@ -29,7 +29,7 @@ public class Bal {
 
     public void adjust(int dt) // dt in msec
     {
-        t = t + dt;
+        t += dt;
 
         // valbeweging formule over de afgelegde weg .. zie een basis natuurkunde boek.
         // y (afgelegde weg in meters) = 1/2 * VALVERSNELLING * tijd * tijd (tijd in seconden)
@@ -40,9 +40,12 @@ public class Bal {
         // vy is de snelheid (in meter/sec) van de puntmassa
         // vy = VALVERSNELLING * tijd (tijd in seconden)
 
-        vy = VALVERSNELLING * tijd_seconden * tijd_seconden;
+        vy = VALVERSNELLING * tijd_seconden; // * tijd_seconden;
 
         // waarom verandert hier (bij deze animatie) de x-waarde niet?
+
+        // Omdat we alleen verticaal vallen
+
 
     }
 
@@ -70,7 +73,7 @@ public class Bal {
         return vx;
     }
 
-    public int getT() {
+    public int getDT() {
         return t;
     }
 

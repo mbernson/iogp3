@@ -14,7 +14,7 @@ public class ValBewegingApp extends JFrame {
 
     public ValBewegingApp()  // constructor
     {
-        setSize(500, 600);
+        setSize(700, 700);
         setTitle("valbeweging");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

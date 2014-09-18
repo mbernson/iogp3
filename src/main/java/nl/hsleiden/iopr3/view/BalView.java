@@ -68,5 +68,8 @@ public class BalView extends JPanel {
         dataview.repaint();
     }
 
+    public int getGrootte() {
+        return grootte;
+    }
 }
 

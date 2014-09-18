@@ -42,11 +42,15 @@ public class BalController implements Runnable, MouseWheelListener {
         this.dt=noordpaneel.getDT(); // T Moet DT worden!!!
     }
 
+    public boolean isOnderStreep() {
+        return (balview.getY() - balview.getGrootte() * 2 <  valBewegingPaneel.getEindY())       && bal.getDT() > 0;
+    }
+
     public void run() // waar komt deze methode vandaan hoe en waar wordt hij aangeroepen?
     {
-        this.dt=noordpaneel.getDT();
         while (doorgaan_thread) {
-            if (bal.getAdjustedY(dt) >= noordpaneel.getYbereik())// laat de thread stoppen als de bal de bodem bereikt
+//            if (balview.getY() >= valBewegingPaneel.getEindY())// laat de thread stoppen als de bal de bodem bereikt
+            if (balview.getY() - (balview.getGrootte() / 2) >= valBewegingPaneel.getEindY())// laat de thread stoppen als de bal de bodem bereikt
             {
                 System.out.println(bal.getAdjustedY(dt));
                 pleaseStop();
@@ -54,10 +58,6 @@ public class BalController implements Runnable, MouseWheelListener {
             }
             else
             {
-                System.out.print("run, dt: ");
-                System.out.println(dt);
-                System.out.print("maxY ");
-                System.out.println(valBewegingPaneel.getBounds().getMaxY());
                 // las een pauze in van 'dt'msec
                 // pas de eigenschap 'dt' van de bal aan
                 bal.adjust(dt);
@@ -71,15 +71,16 @@ public class BalController implements Runnable, MouseWheelListener {
 
     public void mouseWheelMoved(MouseWheelEvent event) {
         if (doorgaan_thread==false && doorgaan_wheel==true ) // deze methode alleen uitvoeren als de thread uitstaat EN
-        {         // 'het verplaatsen mbv het wieltje' aan
+        {
+            // 'het verplaatsen mbv het wieltje' aan
 
             int ticks = event.getWheelRotation(); // wat levert dit op?
             this.dt = noordpaneel.getDT();
 
-            if ((balview.getY()-25 <  valBewegingPaneel.getEindY()) && bal.getDT() > 0) // waarom deze conditie?
-                bal.adjust(dt);// pas de bal aan en gebruik 'ticks' en 'dt'
-            else
-                bal.adjust(-dt);
+            if ((balview.getY() - balview.getGrootte() <  valBewegingPaneel.getEindY())
+                && bal.getDT() >= 0) // waarom deze conditie?
+                bal.adjust(ticks * dt);
+
             // niet vergeten opnieuw ... ?
             balview.repaint();
         }
@@ -90,7 +91,7 @@ public class BalController implements Runnable, MouseWheelListener {
             return;
 
         this.valhoogte = valBewegingPaneel.getEindY(); // VALHOOGTE moet anders!!!
-        this.dt=noordpaneel.getDT(); // Moet nog worden gewijzigd naar DT!!!
+        this.dt=noordpaneel.getDT();
         // initialiseer 'dt'en 'valhoogte'
 
         doorgaan_thread=true;

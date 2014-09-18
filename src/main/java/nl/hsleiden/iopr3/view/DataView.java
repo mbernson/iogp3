@@ -20,7 +20,6 @@ public class DataView extends JPanel implements MouseWheelListener, MouseListene
     private Bal bal;
     private int hoogte;               // actuele hoogte van dit view
 
-    private int x, y;
     private boolean dragged = false;
     private int dragX, dragY;
 
@@ -45,8 +44,6 @@ public class DataView extends JPanel implements MouseWheelListener, MouseListene
     public void paintComponent (Graphics g)
     {
         super.paintComponent(g);
-        if ((x != 0) && (y != 0))
-            setLocation (x, y);
 
         String st_t = String.format ("%.2f", Math.abs(bal.getDT()) / 1000.0);
         // wat doet dit statement precies?
@@ -74,13 +71,12 @@ public class DataView extends JPanel implements MouseWheelListener, MouseListene
         if(hoogte >= MINHOOGTE)
         {
             hoogte = getHeight() + ticks;
-            setSize(180, hoogte);
         }
         else
         {
             hoogte = getHeight() + Math.abs(ticks);
-            setSize(180, hoogte);
         }
+        setSize(180, hoogte);
 
     }
 

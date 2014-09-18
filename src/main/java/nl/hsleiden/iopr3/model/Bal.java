@@ -8,10 +8,10 @@ import java.awt.Color;
 public class Bal {
     private final double VALVERSNELLING = 9.81; // natuurkundige constante
 
-    private double x, // x, y wereld-coordinaten
-                   y,// van de puntmassa (een bal)
-                   vy,  // snelheid van de bal in meter/sec
-                   vx;
+    private double x = 0, // x, y wereld-coordinaten
+                   y = 0,// van de puntmassa (een bal)
+                   vy = 0,  // snelheid van de bal in meter/sec
+                   vx = 0;
 
     // de omzetting in screen-coordinaten gebeurt in nl.hsleiden.iopr3.view.BalView
 
@@ -40,17 +40,15 @@ public class Bal {
         // valbeweging formule over de afgelegde weg .. zie een basis natuurkunde boek.
         // y (afgelegde weg in meters) = 1/2 * VALVERSNELLING * tijd * tijd (tijd in seconden)
 
-        final double tijd_seconden = t / 1000;
+        double tijd_seconden = t / 1000.0;
         y = .5 * VALVERSNELLING * tijd_seconden * tijd_seconden;
 
         // vy is de snelheid (in meter/sec) van de puntmassa
         // vy = VALVERSNELLING * tijd (tijd in seconden)
 
-        vy = VALVERSNELLING * tijd_seconden; // * tijd_seconden;
+        vy = VALVERSNELLING * tijd_seconden;
 
-        // waarom verandert hier (bij deze animatie) de x-waarde niet?
-
-        // Omdat we alleen verticaal vallen
+        // waarom verandert hier (bij deze animatie) de x-waarde niet? // Omdat we alleen verticaal vallen
 
 
     }

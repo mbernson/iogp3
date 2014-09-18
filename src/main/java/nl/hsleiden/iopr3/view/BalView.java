@@ -49,7 +49,7 @@ public class BalView extends JPanel {
 
         int x = (int) valpaneel.getStartX() * 6 - (grootte/2);
 
-        int y = (int) (valpaneel.getStartY() + 25 + bal.getY() * schaalfactor_y);
+        int y = (int) (valpaneel.getStartY() + grootte + bal.getY() * schaalfactor_y);
         // wat doen deze instructies?
 
 

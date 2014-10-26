@@ -14,6 +14,7 @@ import java.awt.event.MouseWheelListener;
 public class BalController implements Runnable, MouseWheelListener {
     private final Bal bal;
     private final BalView balview;
+    private final BalView balview;
     private final ValBewegingPaneel valBewegingPaneel;
     private final ControlePaneelNoord noordpaneel;
 
